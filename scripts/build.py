@@ -215,6 +215,10 @@ def write(path, text):
 def main():
     global COLLECTED
     doc = json.loads((ROOT / "data" / "lectures.json").read_text(encoding="utf-8"))
+    for extra in ("lectures_sugang.json",):          # other platforms' collectors
+        p = ROOT / "data" / extra
+        if p.exists():
+            doc["lectures"] += json.loads(p.read_text(encoding="utf-8"))["lectures"]
     meta = json.loads((ROOT / "data" / "orgs_meta.json").read_text(encoding="utf-8"))
     COLLECTED = doc["collected"].replace("T", " ")
     date_label = doc["collected"][:10]

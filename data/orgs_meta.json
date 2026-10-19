@@ -123,5 +123,10 @@
   "sido": "경기",
   "sigungu": "수원시",
   "slug": "gyeonggi-suwon"
+ },
+ "강동구도시관리공단": {
+  "sido": "서울",
+  "sigungu": "강동구",
+  "slug": "seoul-gangdong"
  }
 }
