@@ -10,9 +10,11 @@
   → `data/orgs.txt`, 홈페이지 도메인 `data/org_domains.json`
 - 수집: 공단 예약 사이트가 누구나 보도록 공개한 강좌 목록. 로그인·예약·결제는 하지 않고,
   하루 한 번 요청 사이 간격을 두고 읽습니다. 강사 이름은 저장하지 않습니다.
-- 두 번째 플랫폼(Spring, CSRF): 강동구도시관리공단. 요금 항목에 이용 개월 수가 있어 월 요금이 정확합니다.
-- 현재 수집 가능한 곳: 같은 예약 플랫폼(`/rest/lecture/list`)을 쓰는 16개 기관, 센터 102곳, 강좌 약 9,600개
-  (`data/sources.json`). 나머지 기관은 다른 시스템이라 수집기를 하나씩 붙이는 중입니다.
+- 현재 26개 지역, 센터 156곳, 강좌 약 13,300개 (2026.10.20)
+  - fmcs 예약 플랫폼(`/rest/lecture/list`, GET 또는 POST): 25개 기관 (`data/sources.json`, `scripts/collect.py`)
+  - "문화/체육 수강시스템"(Spring, CSRF): 강동구. 요금 항목에 이용 개월 수가 있어 월 요금이 정확합니다 (`scripts/collect_sugang.py`)
+  - 정적 HTML 표: 성남도시개발공사 5개 센터. 병합 셀을 풀어 시간대별로 읽고, 남은 자리는 공개되지 않습니다 (`scripts/collect_html.py`)
+- 일부 주소는 공단이 아니라 재단·구청이 운영합니다(`data/host_operators.json`). 출처는 실제 운영 기관으로 표시합니다.
 - 정원과 등록 인원으로 남은 자리를 계산합니다. 등록 인원을 공개하지 않는 기관(항상 0으로 내보냄)은 자리 표시를 끕니다.
 
 ## 실행
@@ -21,6 +23,7 @@
 python scripts/discover.py   # 공단별 강좌 API 응답 여부 → data/sources.json
 python scripts/collect.py    # fmcs 플랫폼 강좌 수집 → data/lectures.json
 python scripts/collect_sugang.py  # "문화/체육 수강시스템" 플랫폼(강동 등) → data/lectures_sugang.json
+python scripts/collect_html.py    # 정적 표로 공개하는 곳(성남 등) → data/lectures_html.json
 python scripts/build.py      # 정적 사이트 → site/dist/
 python -m http.server 8010 -d site/dist
 ```

@@ -63,7 +63,7 @@ LESSON_EXCLUDE = re.compile(r"자유수영|자유이용|일일|자유입장")
 
 
 def audience(target, name=""):
-    t, n = target or "", name or ""
+    t, n = re.sub(r"\s", "", target or ""), name or ""
     adult = re.search(r"성인|누구나|전체|모든|남녀|남여|일반|노인|임산부|(중학|중학생|고등|고등학생|청소년|중고생?)\s*이상|1[3-9]\s*세\s*이상", t)
     if re.search(r"어르신|시니어|실버|노인", t + n) and not re.search(r"청소년|중고|어린이|초등", t):
         return "어르신"
@@ -215,7 +215,7 @@ def write(path, text):
 def main():
     global COLLECTED
     doc = json.loads((ROOT / "data" / "lectures.json").read_text(encoding="utf-8"))
-    for extra in ("lectures_sugang.json",):          # other platforms' collectors
+    for extra in ("lectures_sugang.json", "lectures_html.json"):          # other platforms' collectors
         p = ROOT / "data" / extra
         if p.exists():
             doc["lectures"] += json.loads(p.read_text(encoding="utf-8"))["lectures"]
@@ -263,7 +263,9 @@ def main():
         qa = [(f"{sg} 공공 체육시설 강좌는 한 달에 얼마인가요?",
                f"{date_label} 기준 {sg} 구립·시립 체육시설 강좌 {len(ls)}개의 월 수강료 중간값은 {won(median([l['fee'] for l in ls]))}입니다."),
               (f"{sg}에서 지금 신청할 자리가 남은 강좌가 있나요?",
-               f"{date_label} 기준 접수 중이면서 자리가 남은 강좌는 {sum(1 for l in ls if is_open(l))}개입니다. 대부분의 센터는 매달 정해진 기간(재등록 뒤 신규 접수)에만 받으니, 접수 일정은 공단 예약 사이트에서 확인하세요.")]
+               (f"{date_label} 기준 접수 중이면서 자리가 남은 강좌는 {sum(1 for l in ls if is_open(l))}개입니다. 대부분의 센터는 매달 정해진 기간(재등록 뒤 신규 접수)에만 받으니, 접수 일정은 공단 예약 사이트에서 확인하세요."
+                if any(l.get("status") or l["seats_left"] is not None for l in ls) else
+                f"{sg} 운영 기관은 접수 현황(남은 자리)을 공개하지 않습니다. 매달 재등록 뒤 신규 접수 기간에 공단 사이트나 현장에서 확인하세요."))]
         if swim:
             qa.insert(1, (f"{sg} 성인 수영 강습비는 얼마인가요?", f"성인 수영 강습 {len(swim)}개의 월 수강료는 {won(min(swim))}~{won(max(swim))}, 중간값 {won(median(swim))}입니다."))
         faq_html, faq_ld = faq(qa)

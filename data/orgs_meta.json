@@ -128,5 +128,10 @@
   "sido": "서울",
   "sigungu": "강동구",
   "slug": "seoul-gangdong"
+ },
+ "성남도시개발공사": {
+  "sido": "경기",
+  "sigungu": "성남시",
+  "slug": "gyeonggi-seongnam"
  }
 }
