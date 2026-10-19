@@ -19,7 +19,8 @@ import time
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CTX = ssl.create_default_context(); CTX.check_hostname = False; CTX.verify_mode = ssl.CERT_NONE
+CTX = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT); CTX.check_hostname = False; CTX.verify_mode = ssl.CERT_NONE
+CTX.set_ciphers("DEFAULT:@SECLEVEL=0"); CTX.options |= getattr(ssl, "OP_LEGACY_SERVER_CONNECT", 0x4)
 PAUSE = 0.8
 
 SITES = [
@@ -116,8 +117,50 @@ def parse_page(site, center, page):
     return out
 
 
+# older fmcs installs render the lecture search server-side: /fmcs/1?companyCode=..&page=N
+LEGACY_FMCS = [{"org": "고양도시관리공사", "base": "https://yeyak.gys.or.kr"}]
+# checked in order: the first label contained in the cell wins
+LEGACY_STATUS = [("대기", "FULL"), ("종료", "E"), ("마감", "E"), ("준비", "W"), ("예정", "W"), ("신청", "R"), ("접수중", "R")]
+
+
+def get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (dongne-gym collector)"})
+    return urllib.request.urlopen(req, timeout=30, context=CTX).read().decode("utf-8", "replace")
+
+
+def collect_legacy_fmcs(site):
+    out = []
+    centers = json.loads(get(site["base"] + "/rest/lecture/CompanyList"))["data"]
+    for c in centers:
+        for page in range(1, 200):
+            t = get(f"{site['base']}/fmcs/1?companyCode={c['code']}&sportCode=&statusCode=&page={page}")
+            rows = [r for tb in re.findall(r"<table[^>]*>.*?</table>", t, re.S) for r in grid(tb)[1:] if r and r[0].strip().isdigit()]
+            for no, center, name, when, _period, target, fee, _teacher, status in (r[:9] for r in rows if len(r) >= 9):
+                m = TIME.search(when)
+                fees = [int(a.replace(",", "")) for a in re.findall(r"\d[\d,]*", fee) if int(a.replace(",", "")) > 0]
+                if not m or not fees:
+                    continue
+                label = "".join(status.split())
+                st = next((v for k, v in LEGACY_STATUS if k in label), None)
+                out.append({
+                    "org": site["org"], "operator": site["org"], "center": center or c["name"], "center_code": c["code"],
+                    "source": site["base"], "id": no, "category": re.split(r"[(\-]", name)[0].strip(), "subcategory": None,
+                    "name": " ".join(name.split()), "days": when[:m.start()].strip().replace(" ", ""),
+                    "start": m.group(1), "end": m.group(2), "target": target, "fee": fees[0], "fees": fees, "months": 1,
+                    "capacity": None, "enrolled": None, "seats_left": 0 if st == "FULL" else None,
+                    "status": "E" if st == "FULL" else st, "receive_kind": "".join(status.split()) or None,
+                })
+            if not rows:
+                break
+            time.sleep(PAUSE)
+        print(f"{site['org']} {c['name']:<14} {sum(1 for o in out if o['center_code'] == c['code']):>4}")
+    return out
+
+
 def main():
     lectures = []
+    for site in LEGACY_FMCS:
+        lectures += collect_legacy_fmcs(site)
     for site in SITES:
         for path, center in site["pages"].items():
             req = urllib.request.Request(f"{site['base']}/{path}", headers={"User-Agent": "Mozilla/5.0 (dongne-gym collector)"})

@@ -133,5 +133,10 @@
   "sido": "경기",
   "sigungu": "성남시",
   "slug": "gyeonggi-seongnam"
+ },
+ "고양도시관리공사": {
+  "sido": "경기",
+  "sigungu": "고양시",
+  "slug": "gyeonggi-goyang"
  }
 }

@@ -16,9 +16,12 @@ import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CTX = ssl.create_default_context()
+CTX = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 CTX.check_hostname = False
 CTX.verify_mode = ssl.CERT_NONE
+# several public-sector servers still need old ciphers and legacy renegotiation (e.g. yeyak.gys.or.kr)
+CTX.set_ciphers("DEFAULT:@SECLEVEL=0")
+CTX.options |= getattr(ssl, "OP_LEGACY_SERVER_CONNECT", 0x4)
 HEADERS = {"User-Agent": "Mozilla/5.0 (dongne-gym collector)", "X-Requested-With": "XMLHttpRequest"}
 PAGE = 200
 PAUSE = 0.6          # seconds between requests to one host

@@ -160,6 +160,18 @@
   ]
  },
  {
+  "org": "고양도시관리공사",
+  "base": "https://yeyak.gys.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GYS10",
+    "name": "고양스포츠타운"
+   }
+  ]
+ },
+ {
   "org": "과천도시공사",
   "base": "https://www.gcuc.or.kr",
   "company_path": "/rest/common/company?type=L",

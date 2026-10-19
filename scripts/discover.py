@@ -12,9 +12,12 @@ import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CTX = ssl.create_default_context()
+CTX = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 CTX.check_hostname = False
-CTX.verify_mode = ssl.CERT_NONE        # several public-sector hosts serve broken chains
+CTX.verify_mode = ssl.CERT_NONE
+# several public-sector servers still need old ciphers and legacy renegotiation (e.g. yeyak.gys.or.kr)
+CTX.set_ciphers("DEFAULT:@SECLEVEL=0")
+CTX.options |= getattr(ssl, "OP_LEGACY_SERVER_CONNECT", 0x4)        # several public-sector hosts serve broken chains
 HEADERS = {"User-Agent": "Mozilla/5.0 (dongne-gym collector)", "X-Requested-With": "XMLHttpRequest"}
 # older installs answer GET, newer ones (2025~) only POST
 COMPANY_CALLS = [("/rest/common/lecture_company", "GET"), ("/rest/common/company?type=L", "GET"), ("/rest/common/company", "POST")]

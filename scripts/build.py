@@ -224,7 +224,8 @@ def main():
     date_label = doc["collected"][:10]
     # per-day free-swim slots ("10월 20일(화) / 1부", "일일입장") are tickets, not monthly classes
     daily = re.compile(r"\d{1,2}\s*월\s*\d{1,2}\s*일|일일\s*(입장|이용|권)|1일\s*이용")
-    lectures = [l for l in doc["lectures"] if l["org"] in meta and l["fee"] and not daily.search(l["name"])]
+    not_class = re.compile(r"사물함|락커|라커|주차")      # lockers and parking are sold in the same lists
+    lectures = [l for l in doc["lectures"] if l["org"] in meta and l["fee"] and not daily.search(l["name"]) and not not_class.search(l["name"])]
     for l in lectures:
         l["name"] = " ".join(re.sub(r"<[^>]+>", " ", html.unescape(l["name"])).split())
         m = meta[l["org"]]
