@@ -1,303 +1,9 @@
 [
  {
-  "org": "중구시설관리공단",
-  "base": "https://www.e-junggu.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "JUNGGU01",
-    "name": "충무스포츠센터"
-   },
-   {
-    "code": "JUNGGU02",
-    "name": "회현체육센터"
-   },
-   {
-    "code": "JUNGGU03",
-    "name": "무학봉체육관"
-   },
-   {
-    "code": "JUNGGU04",
-    "name": "장충문화체육센터"
-   },
-   {
-    "code": "JUNGGU05",
-    "name": "훈련원공원종합체육관"
-   },
-   {
-    "code": "JUNGGU06",
-    "name": "손기정문화체육센터"
-   },
-   {
-    "code": "JUNGGU07",
-    "name": "남산타운문화체육센터"
-   }
-  ]
- },
- {
-  "org": "용산구시설관리공단",
-  "base": "https://yssports.yong-san.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "YGSN05",
-    "name": "이태원초등학교수영장"
-   },
-   {
-    "code": "YGSN02",
-    "name": "원효로다목적체육관"
-   },
-   {
-    "code": "YGSN03",
-    "name": "한강로피트니스센터"
-   },
-   {
-    "code": "YGSN04",
-    "name": "구민체력단련실"
-   }
-  ]
- },
- {
-  "org": "성동구도시관리공단",
-  "base": "https://sports.happysd.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "SUNGDONG01",
-    "name": "성동구민종합체육센터"
-   },
-   {
-    "code": "SUNGDONG07",
-    "name": "열린금호교육문화관"
-   },
-   {
-    "code": "SUNGDONG08",
-    "name": "마장국민체육센터"
-   },
-   {
-    "code": "SUNGDONG02",
-    "name": "용답체육센터"
-   },
-   {
-    "code": "SUNGDONG04",
-    "name": "금호스포츠센터"
-   },
-   {
-    "code": "SUNGDONG09",
-    "name": "금호공원체육관"
-   },
-   {
-    "code": "SUNGDONG03",
-    "name": "대현산체육관"
-   },
-   {
-    "code": "SUNGDONG06",
-    "name": "살곶이물놀이장"
-   },
-   {
-    "code": "SUNGDONG13",
-    "name": "서울숲복합문화체육센터"
-   },
-   {
-    "code": "SUNGDONG14",
-    "name": "옥정교육문화관"
-   },
-   {
-    "code": "SUNGDONG15",
-    "name": "송정동 우리동네 작은체육관"
-   }
-  ]
- },
- {
-  "org": "광진구시설관리공단",
-  "base": "https://booking.gwangjin.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "GWANGJIN03",
-    "name": "광진문화예술회관(자양동)"
-   },
-   {
-    "code": "GWANGJIN01",
-    "name": "광진구민체육센터"
-   },
-   {
-    "code": "GWANGJIN02",
-    "name": "중곡문화체육센터(중곡동)"
-   },
-   {
-    "code": "GWANGJIN05",
-    "name": "광장동실내배드민턴장"
-   },
-   {
-    "code": "GWANGJIN04",
-    "name": "아차산배수지체육공원"
-   },
-   {
-    "code": "GWANGJIN06",
-    "name": "자양체육관"
-   }
-  ]
- },
- {
-  "org": "강북구도시관리공단",
-  "base": "https://www.gbcmc.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "GANG_BUK01",
-    "name": "강북문화예술회관"
-   },
-   {
-    "code": "GANG_BUK02",
-    "name": "강북웰빙스포츠센터"
-   },
-   {
-    "code": "GANG_BUK04",
-    "name": "강북오동배드민턴장"
-   }
-  ]
- },
- {
-  "org": "노원구시설관리공단",
-  "base": "https://www.nowonsc.kr",
-  "company_path": "/rest/common/lecture_company",
-  "centers": [
-   {
-    "code": "NOWON02",
-    "name": "월계구민체육센터"
-   },
-   {
-    "code": "NOWON03",
-    "name": "노원구민의전당"
-   },
-   {
-    "code": "NOWON04",
-    "name": "야외체육시설"
-   },
-   {
-    "code": "NOWON05",
-    "name": "상계구민체육센터"
-   },
-   {
-    "code": "NOWON06",
-    "name": "공릉구민체육센터"
-   }
-  ]
- },
- {
-  "org": "은평구시설관리공단",
-  "base": "https://www.efmc.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "EFMC01",
-    "name": "은평종합스포츠타운"
-   },
-   {
-    "code": "EFMC02",
-    "name": "은평청여울수영장"
-   }
-  ]
- },
- {
-  "org": "양천구시설관리공단",
-  "base": "https://www.ycs.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "YCS05",
-    "name": "계남다목적체육관"
-   },
-   {
-    "code": "YCS01",
-    "name": "신월문화체육센터"
-   },
-   {
-    "code": "YCS02",
-    "name": "목동문화체육센터"
-   },
-   {
-    "code": "YCS",
-    "name": "양천구민체육센터"
-   },
-   {
-    "code": "YCS07",
-    "name": "건강힐링문화관"
-   }
-  ]
- },
- {
-  "org": "관악구시설관리공단",
-  "base": "https://www.gwanakgongdan.or.kr",
-  "company_path": "/rest/common/company?type=L",
-  "centers": [
-   {
-    "code": "KWAN_AK14",
-    "name": "강감찬관악체육센터"
-   },
-   {
-    "code": "KWAN_AK05",
-    "name": "관악 제2구민운동장"
-   },
-   {
-    "code": "KWAN_AK03",
-    "name": "관악구민운동장"
-   },
-   {
-    "code": "KWAN_AK01",
-    "name": "관악구민종합체육센터"
-   },
-   {
-    "code": "KWAN_AK00",
-    "name": "관악구시설관리공단"
-   },
-   {
-    "code": "KWAN_AK12",
-    "name": "관악청소년센터"
-   },
-   {
-    "code": "KWAN_AK13",
-    "name": "관악파크골프장"
-   },
-   {
-    "code": "KWAN_AK04",
-    "name": "국사봉체육관"
-   },
-   {
-    "code": "KWAN_AK09",
-    "name": "까치산체육센터"
-   },
-   {
-    "code": "KWAN_AK06",
-    "name": "미성체육관"
-   },
-   {
-    "code": "KWAN_AK10",
-    "name": "선우체육관"
-   },
-   {
-    "code": "KWAN_AK02",
-    "name": "신림체육센터"
-   },
-   {
-    "code": "KWAN_AK07",
-    "name": "장군봉체육관"
-   },
-   {
-    "code": "KWAN_AK11",
-    "name": "조원생활스포츠센터"
-   },
-   {
-    "code": "KWAN_AK08",
-    "name": "청룡산체육관"
-   }
-  ]
- },
- {
   "org": "강남구도시관리공단",
   "base": "https://life.gangnam.go.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
     "code": "GNCC01",
@@ -422,9 +128,322 @@
   ]
  },
  {
+  "org": "강북구도시관리공단",
+  "base": "https://www.gbcmc.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GANG_BUK01",
+    "name": "강북문화예술회관"
+   },
+   {
+    "code": "GANG_BUK02",
+    "name": "강북웰빙스포츠센터"
+   },
+   {
+    "code": "GANG_BUK04",
+    "name": "강북오동배드민턴장"
+   }
+  ]
+ },
+ {
+  "org": "과천도시공사",
+  "base": "https://www.gcuc.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GCS06",
+    "name": "과천 갈현 공공체육시설"
+   },
+   {
+    "code": "GCS01",
+    "name": "과천시민회관(체육)"
+   },
+   {
+    "code": "GCS04",
+    "name": "관문실내체육관"
+   },
+   {
+    "code": "GCS03",
+    "name": "관문체육공원"
+   },
+   {
+    "code": "GCS05",
+    "name": "문원체육공원"
+   }
+  ]
+ },
+ {
+  "org": "관악구시설관리공단",
+  "base": "https://www.gwanakgongdan.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "KWAN_AK14",
+    "name": "강감찬관악체육센터"
+   },
+   {
+    "code": "KWAN_AK05",
+    "name": "관악 제2구민운동장"
+   },
+   {
+    "code": "KWAN_AK03",
+    "name": "관악구민운동장"
+   },
+   {
+    "code": "KWAN_AK01",
+    "name": "관악구민종합체육센터"
+   },
+   {
+    "code": "KWAN_AK00",
+    "name": "관악구시설관리공단"
+   },
+   {
+    "code": "KWAN_AK12",
+    "name": "관악청소년센터"
+   },
+   {
+    "code": "KWAN_AK13",
+    "name": "관악파크골프장"
+   },
+   {
+    "code": "KWAN_AK04",
+    "name": "국사봉체육관"
+   },
+   {
+    "code": "KWAN_AK09",
+    "name": "까치산체육센터"
+   },
+   {
+    "code": "KWAN_AK06",
+    "name": "미성체육관"
+   },
+   {
+    "code": "KWAN_AK10",
+    "name": "선우체육관"
+   },
+   {
+    "code": "KWAN_AK02",
+    "name": "신림체육센터"
+   },
+   {
+    "code": "KWAN_AK07",
+    "name": "장군봉체육관"
+   },
+   {
+    "code": "KWAN_AK11",
+    "name": "조원생활스포츠센터"
+   },
+   {
+    "code": "KWAN_AK08",
+    "name": "청룡산체육관"
+   }
+  ]
+ },
+ {
+  "org": "광명도시공사",
+  "base": "https://sport.gmuc.co.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "GMUC01",
+    "name": "광명시여성비전센터"
+   },
+   {
+    "code": "GMUC02",
+    "name": "광명건강체육센터"
+   },
+   {
+    "code": "GMUC03",
+    "name": "광명국민체육센터"
+   }
+  ]
+ },
+ {
+  "org": "광진구시설관리공단",
+  "base": "https://booking.gwangjin.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GWANGJIN03",
+    "name": "광진문화예술회관(자양동)"
+   },
+   {
+    "code": "GWANGJIN01",
+    "name": "광진구민체육센터"
+   },
+   {
+    "code": "GWANGJIN02",
+    "name": "중곡문화체육센터(중곡동)"
+   },
+   {
+    "code": "GWANGJIN05",
+    "name": "광장동실내배드민턴장"
+   },
+   {
+    "code": "GWANGJIN04",
+    "name": "아차산배수지체육공원"
+   },
+   {
+    "code": "GWANGJIN06",
+    "name": "자양체육관"
+   }
+  ]
+ },
+ {
+  "org": "구미도시공사",
+  "base": "https://sports.gmuc.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GUMI01",
+    "name": "올림픽기념국민생활관"
+   },
+   {
+    "code": "GUMI02",
+    "name": "근로자종합복지회관"
+   },
+   {
+    "code": "GUMI03",
+    "name": "금오테니스장"
+   },
+   {
+    "code": "GUMI04",
+    "name": "구포생활체육공원"
+   },
+   {
+    "code": "GUMI05",
+    "name": "들성생활체육센터"
+   },
+   {
+    "code": "GUMI06",
+    "name": "강동국민체육센터"
+   },
+   {
+    "code": "GUMI07",
+    "name": "도봉국민체육센터"
+   },
+   {
+    "code": "GUMI08",
+    "name": "궁도장"
+   }
+  ]
+ },
+ {
+  "org": "군포도시공사",
+  "base": "https://www.gunpouc.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GUNPO01",
+    "name": "군포국민체육센터"
+   },
+   {
+    "code": "GUNPO03",
+    "name": "생활체육시설(송죽다목적체육관/소규모체육시설)"
+   },
+   {
+    "code": "GUNPO",
+    "name": "군포도시공사"
+   },
+   {
+    "code": "GUNPO05",
+    "name": "군포도시공사 부곡체육시설"
+   },
+   {
+    "code": "GUNPO06",
+    "name": "송정복합체육센터"
+   }
+  ]
+ },
+ {
+  "org": "김포도시공사",
+  "base": "https://yeyak.guc.or.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "GIMPO07",
+    "name": "김포노을체육관"
+   },
+   {
+    "code": "GIMPO09",
+    "name": "고촌도담수영장"
+   },
+   {
+    "code": "GIMPO10",
+    "name": "양곡문화체육센터"
+   },
+   {
+    "code": "GIMPO06",
+    "name": "종합운동장/시민회관"
+   },
+   {
+    "code": "GIMPO01",
+    "name": "풍무국민체육센터/풍무체육문화센터"
+   },
+   {
+    "code": "GIMPO05",
+    "name": "걸포다목적체육시설"
+   },
+   {
+    "code": "GIMPO02",
+    "name": "김포생활체육관"
+   },
+   {
+    "code": "GIMPO03",
+    "name": "통진문화회관"
+   },
+   {
+    "code": "GIMPO04",
+    "name": "김포한강스포츠센터"
+   },
+   {
+    "code": "GIMPO08",
+    "name": "농어민문화체육센터"
+   }
+  ]
+ },
+ {
+  "org": "노원구시설관리공단",
+  "base": "https://www.nowonsc.kr",
+  "company_path": "/rest/common/lecture_company",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "NOWON02",
+    "name": "월계구민체육센터"
+   },
+   {
+    "code": "NOWON03",
+    "name": "노원구민의전당"
+   },
+   {
+    "code": "NOWON04",
+    "name": "야외체육시설"
+   },
+   {
+    "code": "NOWON05",
+    "name": "상계구민체육센터"
+   },
+   {
+    "code": "NOWON06",
+    "name": "공릉구민체육센터"
+   }
+  ]
+ },
+ {
   "org": "부천도시공사",
   "base": "https://www.best.or.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
     "code": "BCS01",
@@ -469,29 +488,122 @@
   ]
  },
  {
-  "org": "군포도시공사",
-  "base": "https://www.gunpouc.or.kr",
+  "org": "성동구도시관리공단",
+  "base": "https://sports.happysd.or.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
-    "code": "GUNPO01",
-    "name": "군포국민체육센터"
+    "code": "SUNGDONG01",
+    "name": "성동구민종합체육센터"
    },
    {
-    "code": "GUNPO03",
-    "name": "생활체육시설(송죽다목적체육관/소규모체육시설)"
+    "code": "SUNGDONG07",
+    "name": "열린금호교육문화관"
    },
    {
-    "code": "GUNPO",
-    "name": "군포도시공사"
+    "code": "SUNGDONG08",
+    "name": "마장국민체육센터"
    },
    {
-    "code": "GUNPO05",
-    "name": "군포도시공사 부곡체육시설"
+    "code": "SUNGDONG02",
+    "name": "용답체육센터"
    },
    {
-    "code": "GUNPO06",
-    "name": "송정복합체육센터"
+    "code": "SUNGDONG04",
+    "name": "금호스포츠센터"
+   },
+   {
+    "code": "SUNGDONG09",
+    "name": "금호공원체육관"
+   },
+   {
+    "code": "SUNGDONG03",
+    "name": "대현산체육관"
+   },
+   {
+    "code": "SUNGDONG06",
+    "name": "살곶이물놀이장"
+   },
+   {
+    "code": "SUNGDONG13",
+    "name": "서울숲복합문화체육센터"
+   },
+   {
+    "code": "SUNGDONG14",
+    "name": "옥정교육문화관"
+   },
+   {
+    "code": "SUNGDONG15",
+    "name": "송정동 우리동네 작은체육관"
+   }
+  ]
+ },
+ {
+  "org": "시흥도시공사",
+  "base": "https://sportsapp.shsi.or.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "SIHEUNG01",
+    "name": "[하중]시흥국민체육센터"
+   },
+   {
+    "code": "SIHEUNG02",
+    "name": "정왕평생학습관"
+   },
+   {
+    "code": "SIHEUNG07",
+    "name": "시흥능곡어울림센터"
+   },
+   {
+    "code": "SIHEUNG08",
+    "name": "[정왕]시흥어울림국민체육센터"
+   },
+   {
+    "code": "SIHEUNG09",
+    "name": "장곡동생활체육시설"
+   },
+   {
+    "code": "SIHEUNG11",
+    "name": "다니생활체육관"
+   },
+   {
+    "code": "SIHEUNG12",
+    "name": "장곡문화체육센터"
+   },
+   {
+    "code": "SIHEUNG14",
+    "name": "목감2어울림센터"
+   }
+  ]
+ },
+ {
+  "org": "양천구시설관리공단",
+  "base": "https://www.ycs.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "YCS05",
+    "name": "계남다목적체육관"
+   },
+   {
+    "code": "YCS01",
+    "name": "신월문화체육센터"
+   },
+   {
+    "code": "YCS02",
+    "name": "목동문화체육센터"
+   },
+   {
+    "code": "YCS",
+    "name": "양천구민체육센터"
+   },
+   {
+    "code": "YCS07",
+    "name": "건강힐링문화관"
    }
   ]
  },
@@ -499,6 +611,7 @@
   "org": "오산도시공사",
   "base": "https://www.osansports.or.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
     "code": "OSANSISUL05",
@@ -523,9 +636,50 @@
   ]
  },
  {
+  "org": "용산구시설관리공단",
+  "base": "https://yssports.yong-san.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "YGSN05",
+    "name": "이태원초등학교수영장"
+   },
+   {
+    "code": "YGSN02",
+    "name": "원효로다목적체육관"
+   },
+   {
+    "code": "YGSN03",
+    "name": "한강로피트니스센터"
+   },
+   {
+    "code": "YGSN04",
+    "name": "구민체력단련실"
+   }
+  ]
+ },
+ {
+  "org": "은평구시설관리공단",
+  "base": "https://www.efmc.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "EFMC01",
+    "name": "은평종합스포츠타운"
+   },
+   {
+    "code": "EFMC02",
+    "name": "은평청여울수영장"
+   }
+  ]
+ },
+ {
   "org": "의왕도시공사",
   "base": "https://reserve.uuc.or.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
     "code": "UUC01",
@@ -554,68 +708,122 @@
   ]
  },
  {
-  "org": "과천도시공사",
-  "base": "https://www.gcuc.or.kr",
+  "org": "인천광역시 미추홀구시설관리공단",
+  "base": "https://sports.imfm.or.kr",
   "company_path": "/rest/common/company?type=L",
+  "method": "GET",
   "centers": [
    {
-    "code": "GCS06",
-    "name": "과천 갈현 공공체육시설"
+    "code": "ICNAMGU01",
+    "name": "인천광역시미추홀구국민체육센터"
    },
    {
-    "code": "GCS01",
-    "name": "과천시민회관(체육)"
-   },
-   {
-    "code": "GCS04",
-    "name": "관문실내체육관"
-   },
-   {
-    "code": "GCS03",
-    "name": "관문체육공원"
-   },
-   {
-    "code": "GCS05",
-    "name": "문원체육공원"
+    "code": "ICNAMGU02",
+    "name": "주안스포츠문화센터"
    }
   ]
  },
  {
-  "org": "구미도시공사",
-  "base": "https://sports.gmuc.or.kr",
-  "company_path": "/rest/common/company?type=L",
+  "org": "종로구시설관리공단",
+  "base": "https://www.ijongno.co.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
   "centers": [
    {
-    "code": "GUMI01",
+    "code": "JONGNO01",
     "name": "올림픽기념국민생활관"
    },
    {
-    "code": "GUMI02",
-    "name": "근로자종합복지회관"
+    "code": "JONGNO02",
+    "name": "종로구민회관"
    },
    {
-    "code": "GUMI03",
-    "name": "금오테니스장"
+    "code": "JONGNO03",
+    "name": "종로문화체육센터"
    },
    {
-    "code": "GUMI04",
-    "name": "구포생활체육공원"
+    "code": "JONGNO04",
+    "name": "동부여성문화센터"
+   }
+  ]
+ },
+ {
+  "org": "중구시설관리공단",
+  "base": "https://www.e-junggu.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "JUNGGU01",
+    "name": "충무스포츠센터"
    },
    {
-    "code": "GUMI05",
-    "name": "들성생활체육센터"
+    "code": "JUNGGU02",
+    "name": "회현체육센터"
    },
    {
-    "code": "GUMI06",
-    "name": "강동국민체육센터"
+    "code": "JUNGGU03",
+    "name": "무학봉체육관"
    },
    {
-    "code": "GUMI07",
-    "name": "도봉국민체육센터"
+    "code": "JUNGGU04",
+    "name": "장충문화체육센터"
    },
    {
-    "code": "GUMI08",
-    "name": "궁도장"
+    "code": "JUNGGU05",
+    "name": "훈련원공원종합체육관"
+   },
+   {
+    "code": "JUNGGU06",
+    "name": "손기정문화체육센터"
+   },
+   {
+    "code": "JUNGGU07",
+    "name": "남산타운문화체육센터"
+   }
+  ]
+ },
+ {
+  "org": "춘천도시공사",
+  "base": "https://rev.cuc.or.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "CUC01",
+    "name": "우두동 반다비국민체육센터"
+   },
+   {
+    "code": "CUC02",
+    "name": "후평동 근로자종합복지관"
+   },
+   {
+    "code": "CUC03",
+    "name": "석사동 국민체육센터"
+   },
+   {
+    "code": "CUC04",
+    "name": "효자동 국민생활관(공지천구장, 신북구장)"
+   },
+   {
+    "code": "CUC06",
+    "name": "파크골프장(소양강/서면)"
+   },
+   {
+    "code": "CUC07",
+    "name": "서면파크골프장"
+   },
+   {
+    "code": "CUC09",
+    "name": "빙상장(풋살장,족구장,에어돔)"
+   },
+   {
+    "code": "CUC14",
+    "name": "송암테니스장"
+   },
+   {
+    "code": "CUC18",
+    "name": "봄내체육관"
    }
   ]
  }

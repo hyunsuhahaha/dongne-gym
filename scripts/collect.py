@@ -12,6 +12,7 @@ import pathlib
 import re
 import ssl
 import time
+import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -23,8 +24,9 @@ PAGE = 200
 PAUSE = 0.6          # seconds between requests to one host
 
 
-def get_json(url):
-    req = urllib.request.Request(url, headers=HEADERS)
+def get_json(url, form=None):
+    data = urllib.parse.urlencode(form).encode() if form is not None else None
+    req = urllib.request.Request(url, data=data, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=30, context=CTX) as r:
         return json.loads(r.read().decode("utf-8", "replace"))
 
@@ -61,10 +63,13 @@ def collect(src):
     for center in src["centers"]:
         page = 1
         while True:
-            url = (f"{src['base']}/rest/lecture/list?company_code={center['code']}&mem_no=&search_type=&category_cd="
-                   f"&category_level=9&class_nm=&train_day=&adult_gubn=&lecturer_nm=&page={page}&page_size={PAGE}")
+            form = {"company_code": center["code"], "mem_no": "", "search_type": "", "category_cd": "", "category_level": 9,
+                    "class_nm": "", "train_day": "", "adult_gubn": "", "lecturer_nm": "", "page": page, "page_size": PAGE}
             try:
-                rows = get_json(url)
+                if src.get("method") == "POST":
+                    rows = get_json(f"{src['base']}/rest/lecture/list", form)
+                else:
+                    rows = get_json(f"{src['base']}/rest/lecture/list?" + urllib.parse.urlencode(form))
             except Exception as e:
                 print(f"  {src['org']} {center['name']} p{page}: {type(e).__name__}")
                 break
