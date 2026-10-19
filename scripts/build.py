@@ -13,14 +13,18 @@ import collections
 import datetime
 import html
 import json
+import os
 import pathlib
+import urllib.parse
 import re
 import shutil
 import statistics
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "site" / "dist"
-SITE_URL = "https://dongne-gym.pages.dev"     # placeholder until a real domain is chosen
+# published on GitHub Pages under /dongne-gym/; set DONGNE_SITE_URL=http://localhost:8010 for a local preview
+SITE_URL = os.environ.get("DONGNE_SITE_URL", "https://hyunsuhahaha.github.io/dongne-gym").rstrip("/")
+BASE = urllib.parse.urlparse(SITE_URL).path.rstrip("/")
 NAME = "동네운동"
 
 # 종목: (slug, label, pattern over category + subcategory + name). First match wins.
@@ -208,6 +212,8 @@ def faq(qa):
 def write(path, text):
     p = OUT / path.strip("/") / "index.html" if not path.endswith(".xml") and not path.endswith(".txt") else OUT / path.strip("/")
     p.parent.mkdir(parents=True, exist_ok=True)
+    if p.suffix == ".html" and BASE:            # root-relative links must live under the project path
+        text = text.replace('href="/', f'href="{BASE}/')
     p.write_text(text, encoding="utf-8")
 
 

@@ -1,5 +1,7 @@
 # 동네운동
 
+사이트: https://hyunsuhahaha.github.io/dongne-gym/
+
 구민체육센터·시민체육센터의 강좌 요금과 남은 자리를 지역·종목별로 비교하는 정적 사이트입니다.
 공공 체육시설은 사설보다 훨씬 싸지만(수영 강습 월 2~6만 원대), 정보가 공단마다 따로 있어
 "우리 동네에서 제일 싼 수영 강습은 어디고 자리가 있나"를 한 번에 알 수 없습니다.
@@ -25,6 +27,7 @@ python scripts/collect.py    # fmcs 플랫폼 강좌 수집 → data/lectures.js
 python scripts/collect_sugang.py  # "문화/체육 수강시스템" 플랫폼(강동 등) → data/lectures_sugang.json
 python scripts/collect_html.py    # 정적 표로 공개하는 곳(성남 등) → data/lectures_html.json
 python scripts/build.py      # 정적 사이트 → site/dist/
+DONGNE_SITE_URL=http://localhost:8010 python scripts/build.py   # 로컬 미리보기용(하위 경로 없이)
 python -m http.server 8010 -d site/dist
 ```
 
@@ -33,3 +36,8 @@ python -m http.server 8010 -d site/dist
 - `/r/<지역>/` 지역별 종목 요약, `/r/<지역>/<종목>/` 지역×종목(대상별 표, FAQ)
 - `/c/<센터>/` 센터별 전체 강좌, `/s/<종목>/` 종목별 지역 비교
 - `/about/` 출처, `/data/lectures.json`, `sitemap.xml`, `llms.txt`
+
+## 배포
+
+main에 푸시하면 GitHub Actions가 커밋된 `data/*.json`으로 사이트를 만들어 GitHub Pages에 올립니다.
+수집은 국내 회선에서 돌리고(`scripts/refresh.py`) 결과 데이터를 커밋합니다.
