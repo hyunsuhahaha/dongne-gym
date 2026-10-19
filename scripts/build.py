@@ -114,7 +114,7 @@ table{width:100%;border-collapse:collapse;background:var(--card);border:1px soli
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600;font-size:13px;background:var(--bg)}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .tag{display:inline-block;font-size:12px;border-radius:6px;padding:1px 7px;white-space:nowrap}
-.ok{background:var(--acc-bg);color:var(--acc)}.few{background:var(--warn-bg);color:var(--warn)}.full{background:var(--full-bg);color:var(--full)}
+.ok{background:var(--acc-bg);color:var(--acc)}.wait{background:var(--bg);color:var(--mut);border:1px solid var(--line)}.few{background:var(--warn-bg);color:var(--warn)}.full{background:var(--full-bg);color:var(--full)}
 .note{font-size:13px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:16px 0}
 .faq dt{font-weight:700;margin-top:12px}.faq dd{margin:4px 0 0;color:var(--fg)}
 footer{border-top:1px solid var(--line);margin-top:48px;padding:20px 0 40px;color:var(--mut);font-size:13px}
@@ -146,10 +146,25 @@ def page(title, desc, path, body, crumbs=(), jsonld=None):
 </body></html>"""
 
 
+OPEN_STATUS = {"R", "RW"}          # 공단 예약 화면의 "접수하기"
+STATUS_TAG = {"W": ("wait", "접수 전"), "E": ("full", "접수종료"), "RR": ("wait", "재등록 기간")}
+
+
+def is_open(l):
+    """Can a newcomer sign up right now? Status 접수중 and, where enrollment is published, a free seat."""
+    if l.get("status") not in OPEN_STATUS:
+        return False
+    return l["seats_left"] is None or l["seats_left"] > 0
+
+
 def seats_tag(l):
+    st = l.get("status")
+    if st in STATUS_TAG:
+        cls, text = STATUS_TAG[st]
+        return f'<span class="tag {cls}">{text}</span>'
     left, cap = l["seats_left"], l["capacity"]
     if left is None or not cap:
-        return ""
+        return '<span class="tag ok">접수중</span>' if st in OPEN_STATUS else ""
     if left <= 0:
         return '<span class="tag full">마감</span>'
     if left <= max(2, cap // 10):
@@ -176,9 +191,8 @@ def summary_cards(groups, link):
         fs = [l["fee"] for l in ls if l["fee"] and l["fee"] < MONTHLY_MAX]
         if not fs:
             continue
-        open_n = sum(1 for l in ls if (l["seats_left"] or 0) > 0)
-        known = any(l["seats_left"] is not None for l in ls)
-        seat_txt = f" · 자리 있는 강좌 {open_n}개" if known else ""
+        open_n = sum(1 for l in ls if is_open(l))
+        seat_txt = f" · 지금 신청 가능 {open_n}개" if open_n else ""
         cards.append(f'<a class="card" href="{esc(link(key))}"><b>{esc(SPORT_LABEL.get(key, key))}</b>'
                      f'<div class="big">월 {won(median(fs))}</div><small>중간값 · 최저 {won(min(fs))} · 강좌 {len(ls)}개{seat_txt}</small></a>')
     return '<div class="cards">' + "".join(cards) + "</div>"
@@ -204,10 +218,13 @@ def main():
     meta = json.loads((ROOT / "data" / "orgs_meta.json").read_text(encoding="utf-8"))
     COLLECTED = doc["collected"].replace("T", " ")
     date_label = doc["collected"][:10]
-    lectures = [l for l in doc["lectures"] if l["org"] in meta and l["fee"]]
+    # per-day free-swim slots ("10월 20일(화) / 1부", "일일입장") are tickets, not monthly classes
+    daily = re.compile(r"\d{1,2}\s*월\s*\d{1,2}\s*일|일일\s*(입장|이용|권)|1일\s*이용")
+    lectures = [l for l in doc["lectures"] if l["org"] in meta and l["fee"] and not daily.search(l["name"])]
     for l in lectures:
         l["name"] = " ".join(re.sub(r"<[^>]+>", " ", html.unescape(l["name"])).split())
         m = meta[l["org"]]
+        l.setdefault("operator", l["org"])
         l["region"], l["region_name"] = m["slug"], f'{m["sido"]} {m["sigungu"]}'
         l["sigungu"] = m["sigungu"]
         l["sport"] = classify(l)
@@ -242,7 +259,7 @@ def main():
         qa = [(f"{sg} 공공 체육시설 강좌는 한 달에 얼마인가요?",
                f"{date_label} 기준 {sg} 구립·시립 체육시설 강좌 {len(ls)}개의 월 수강료 중간값은 {won(median([l['fee'] for l in ls]))}입니다."),
               (f"{sg}에서 지금 신청할 자리가 남은 강좌가 있나요?",
-               f"정원이 공개된 강좌 중 {sum(1 for l in ls if (l['seats_left'] or 0) > 0)}개에 자리가 남아 있습니다. 실제 접수 가능 여부는 공단 예약 사이트에서 확인하세요.")]
+               f"{date_label} 기준 접수 중이면서 자리가 남은 강좌는 {sum(1 for l in ls if is_open(l))}개입니다. 대부분의 센터는 매달 정해진 기간(재등록 뒤 신규 접수)에만 받으니, 접수 일정은 공단 예약 사이트에서 확인하세요.")]
         if swim:
             qa.insert(1, (f"{sg} 성인 수영 강습비는 얼마인가요?", f"성인 수영 강습 {len(swim)}개의 월 수강료는 {won(min(swim))}~{won(max(swim))}, 중간값 {won(median(swim))}입니다."))
         faq_html, faq_ld = faq(qa)
@@ -259,7 +276,7 @@ def main():
         for s, sl in groups:
             fs = [l["fee"] for l in sl if l["fee"] < MONTHLY_MAX] or [l["fee"] for l in sl]
             label = SPORT_LABEL[s]
-            open_n = sum(1 for l in sl if (l["seats_left"] or 0) > 0)
+            open_n = sum(1 for l in sl if is_open(l))
             sections, qa = [], []
             for aud in AUDIENCES:
                 al = [l for l in sl if l["aud"] == aud]
@@ -271,10 +288,10 @@ def main():
                 qa.append((f"{sg} {aud} {label} 강습은 한 달에 얼마인가요?",
                            f"{date_label} 기준 {sg} 공공 체육시설 {aud} 대상 {label} 강좌 {len(al)}개의 월 수강료는 {won(min(afs))}~{won(max(afs))}, 중간값은 {won(median(afs))}입니다. "
                            f"가장 저렴한 강좌는 {cheapest['center']}의 '{cheapest['name']}'({cheapest['days']} {cheapest['start']}~{cheapest['end']}, 월 {won(cheapest['fee'])})입니다."))
-            qa.append((f"지금 자리가 남은 {label} 강좌가 있나요?", f"{len(sl)}개 중 {open_n}개 강좌에 자리가 남아 있습니다. 재등록·추첨 기간에는 실제 접수와 다를 수 있습니다."))
+            qa.append((f"지금 신청할 수 있는 {label} 강좌가 있나요?", f"{date_label} 기준 {len(sl)}개 중 {open_n}개가 접수 중이면서 자리가 남아 있습니다. 나머지는 접수 전이거나 마감·재등록 기간입니다."))
             faq_html, faq_ld = faq(qa)
             body = (f"<h1>{esc(sg)} {esc(label)} 강습 가격과 빈자리</h1>"
-                    f'<p class="lead">{esc(rname)} 공공 체육시설의 {esc(label)} 강좌 {len(sl)}개 · 자리 있는 강좌 {open_n}개 · {esc(date_label)} 기준. 대상별로 나눠 비교합니다.</p>'
+                    f'<p class="lead">{esc(rname)} 공공 체육시설의 {esc(label)} 강좌 {len(sl)}개 · 지금 신청 가능 {open_n}개 · {esc(date_label)} 기준. 대상별로 나눠 비교합니다.</p>'
                     + "".join(sections) + f"<h2>자주 묻는 질문</h2>{faq_html}")
             write(f"/r/{region}/{s}/", page(f"{sg} {label} 강습 가격 비교 - 구민체육센터 {len(sl)}개 강좌 | {NAME}",
                                             f"{rname} {label} 강좌 {len(sl)}개: 월 {won(min(fs))}~{won(max(fs))}, 중간값 {won(median(fs))}. 성인·어린이 대상별 요금과 남은 자리.",
@@ -289,7 +306,7 @@ def main():
         c = ls[0]
         groups = sorted(collections.Counter(l["sport"] for l in ls).items(), key=lambda kv: -kv[1])
         body = (f"<h1>{esc(c['center'])} 강좌·수강료</h1>"
-                f'<p class="lead">{esc(c["region_name"])} · {esc(c["org"])} 운영 · 강좌 {len(ls)}개 · <a href="{esc(c["source"])}" rel="nofollow">공단 예약 사이트</a></p>'
+                f'<p class="lead">{esc(c["region_name"])} · {esc(c.get("operator") or c["org"])} 운영 · 강좌 {len(ls)}개 · <a href="{esc(c["source"])}" rel="nofollow">공단 예약 사이트</a></p>'
                 + "".join(f"<h2>{esc(SPORT_LABEL[s])}</h2>{lecture_table([l for l in ls if l['sport'] == s], show_center=False)}" for s, _ in groups))
         write(f"/c/{cid}/", page(f"{c['center']} 수강료·강좌 시간표 ({c['region_name']}) | {NAME}",
                                  f"{c['center']} 강좌 {len(ls)}개의 수강료, 요일·시간, 남은 자리.",
@@ -317,17 +334,18 @@ def main():
     # home
     region_links = "".join(f'<a href="/r/{r}/">{esc(ls[0]["region_name"])}</a>' for r, ls in sorted(by_region.items(), key=lambda kv: kv[1][0]["region_name"]))
     sport_links = "".join(f'<a href="/s/{s}/">{esc(SPORT_LABEL[s])}</a>' for s, _ in sorted(collections.Counter(l["sport"] for l in lectures).items(), key=lambda kv: -kv[1]))
-    open_swim = sorted([l for l in lectures if l["sport"] == "swim" and (l["seats_left"] or 0) > 0 and l["aud"] == "성인" and not LESSON_EXCLUDE.search(l["name"])], key=lambda l: l["fee"])[:12]
+    open_swim = sorted([l for l in lectures if l["sport"] == "swim" and is_open(l) and l["aud"] == "성인" and not LESSON_EXCLUDE.search(l["name"])], key=lambda l: l["fee"])[:12]
     body = ("<h1>우리 동네 구민체육센터, 한 달에 얼마?</h1>"
             f'<p class="lead">시설관리공단·도시공사가 공개한 공공 체육시설 강좌 {len(lectures):,}개의 수강료와 남은 자리를 모았습니다. 사설보다 훨씬 싼 동네 수영·필라테스·헬스를 찾아보세요. {esc(date_label)} 기준.</p>'
             f'<h2>지역</h2><div class="chips">{region_links}</div><h2>종목</h2><div class="chips">{sport_links}</div>'
-            f"<h2>지금 자리가 남은 저렴한 성인 수영 강습</h2>{lecture_table(open_swim)}")
+            f"<h2>지금 신청할 수 있는 저렴한 성인 수영 강습</h2>{lecture_table(open_swim)}")
     write("/", page(f"{NAME} - 구민체육센터 강좌 요금·빈자리 비교", "공공 체육시설 수영·필라테스·헬스 강좌의 수강료와 남은 자리를 지역별로 비교합니다.", "/", body,
                     jsonld={"@context": "https://schema.org", "@type": "WebSite", "name": NAME, "url": SITE_URL}))
     urls.append("/")
 
     # about
-    src_rows = "".join(f'<tr><td>{esc(o)}</td><td>{esc(m["sido"])} {esc(m["sigungu"])}</td><td class="num">{sum(1 for l in lectures if l["org"] == o):,}</td></tr>' for o, m in meta.items())
+    ops = collections.Counter((l.get("operator") or l["org"], l["region_name"]) for l in lectures)
+    src_rows = "".join(f'<tr><td>{esc(o)}</td><td>{esc(r)}</td><td class="num">{n:,}</td></tr>' for (o, r), n in sorted(ops.items(), key=lambda kv: kv[0][1]))
     body = ("<h1>출처와 주의사항</h1>"
             "<p>이 사이트는 각 지역 시설관리공단·도시공사가 누구나 볼 수 있게 공개한 강좌 목록(강좌명, 요일·시간, 대상, 수강료, 정원, 등록 인원)을 하루 한 번 읽어 정리합니다. "
             "강사 이름 같은 개인 정보는 저장하지 않으며, 예약이나 결제 기능은 없습니다.</p>"
@@ -341,7 +359,7 @@ def main():
 
     # machine-readable copies
     (OUT / "data").mkdir(exist_ok=True)
-    public = [{k: l[k] for k in ("region_name", "org", "center", "sport", "name", "days", "start", "end", "target", "fee", "fees", "capacity", "enrolled", "seats_left")} for l in lectures]
+    public = [{k: l[k] for k in ("region_name", "operator", "center", "sport", "name", "days", "start", "end", "target", "fee", "fees", "capacity", "enrolled", "seats_left")} for l in lectures]
     (OUT / "data" / "lectures.json").write_text(json.dumps({"collected": doc["collected"], "lectures": public}, ensure_ascii=False), encoding="utf-8")
     today = datetime.date.today().isoformat()
     write("/sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'

@@ -148,6 +148,18 @@
   ]
  },
  {
+  "org": "강서구시설관리공단",
+  "base": "https://sports.gangseo.seoul.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "GANGSEO04",
+    "name": "생활체육프로그램"
+   }
+  ]
+ },
+ {
   "org": "과천도시공사",
   "base": "https://www.gcuc.or.kr",
   "company_path": "/rest/common/company?type=L",
@@ -440,6 +452,42 @@
   ]
  },
  {
+  "org": "마포구시설관리공단",
+  "base": "https://course.mfac.or.kr",
+  "company_path": "/rest/common/company?type=L",
+  "method": "GET",
+  "centers": [
+   {
+    "code": "MAPOARTCENTER",
+    "name": "마포아트센터"
+   }
+  ]
+ },
+ {
+  "org": "마포구시설관리공단",
+  "base": "https://mapo.mapogym.or.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "MAPOSC01",
+    "name": "마포365구민센터"
+   },
+   {
+    "code": "MAPOSC02",
+    "name": "성미산체육관"
+   },
+   {
+    "code": "MAPOSC03",
+    "name": "염리생활체육관"
+   },
+   {
+    "code": "MAPOSC04",
+    "name": "망원나들목체육관"
+   }
+  ]
+ },
+ {
   "org": "부천도시공사",
   "base": "https://www.best.or.kr",
   "company_path": "/rest/common/company?type=L",
@@ -536,6 +584,50 @@
    {
     "code": "SUNGDONG15",
     "name": "송정동 우리동네 작은체육관"
+   }
+  ]
+ },
+ {
+  "org": "수원도시공사",
+  "base": "https://yeyak.syf.or.kr",
+  "company_path": "/rest/common/company",
+  "method": "POST",
+  "centers": [
+   {
+    "code": "SYF01",
+    "name": "수원청소년문화센터"
+   },
+   {
+    "code": "SYF05",
+    "name": "광교청소년청년센터"
+   },
+   {
+    "code": "SYF02",
+    "name": "권선청소년청년센터"
+   },
+   {
+    "code": "SYF04",
+    "name": "장안청소년청년센터"
+   },
+   {
+    "code": "SYF03",
+    "name": "영통청소년청년센터"
+   },
+   {
+    "code": "SYF07",
+    "name": "칠보청소년청년센터"
+   },
+   {
+    "code": "SYF06",
+    "name": "청소년상담복지센터"
+   },
+   {
+    "code": "SYF08",
+    "name": "천천청소년청년센터"
+   },
+   {
+    "code": "SYF10",
+    "name": "권선배움마루"
    }
   ]
  },

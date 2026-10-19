@@ -22,6 +22,8 @@ CTX.verify_mode = ssl.CERT_NONE
 HEADERS = {"User-Agent": "Mozilla/5.0 (dongne-gym collector)", "X-Requested-With": "XMLHttpRequest"}
 PAGE = 200
 PAUSE = 0.6          # seconds between requests to one host
+# a few hosts found under a corporation's name are really run by a foundation or the district office
+OPERATORS = json.loads((ROOT / "data" / "host_operators.json").read_text(encoding="utf-8"))
 
 
 def get_json(url, form=None):
@@ -45,7 +47,8 @@ def lecture(src, center, r):
     capacity, enrolled = num(r.get("capa")), num(r.get("reg_person"))
     f = fees(r.get("course_fee"))
     return {
-        "org": src["org"], "center": r.get("comnm") or center["name"], "center_code": center["code"],
+        "org": src["org"], "operator": OPERATORS.get(src["base"], src["org"]),
+        "center": r.get("comnm") or center["name"], "center_code": center["code"],
         "source": src["base"], "id": r.get("class_cd"),
         "category": (r.get("category1") or "").strip() or None, "subcategory": (r.get("category2") or "").strip() or None,
         "name": (r.get("class_nm") or "").strip(),
@@ -55,6 +58,7 @@ def lecture(src, center, r):
         "fee": f[0] if f else None, "fees": f,
         "capacity": capacity, "enrolled": enrolled,
         "seats_left": (capacity - enrolled) if capacity and enrolled is not None else None,
+        "status": r.get("status"), "receive_kind": r.get("receive_kind"),
     }
 
 
