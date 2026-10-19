@@ -1,0 +1,18 @@
+{
+  "중구시설관리공단": {"sido": "서울", "sigungu": "중구", "slug": "seoul-junggu"},
+  "용산구시설관리공단": {"sido": "서울", "sigungu": "용산구", "slug": "seoul-yongsan"},
+  "성동구도시관리공단": {"sido": "서울", "sigungu": "성동구", "slug": "seoul-seongdong"},
+  "광진구시설관리공단": {"sido": "서울", "sigungu": "광진구", "slug": "seoul-gwangjin"},
+  "강북구도시관리공단": {"sido": "서울", "sigungu": "강북구", "slug": "seoul-gangbuk"},
+  "노원구시설관리공단": {"sido": "서울", "sigungu": "노원구", "slug": "seoul-nowon"},
+  "은평구시설관리공단": {"sido": "서울", "sigungu": "은평구", "slug": "seoul-eunpyeong"},
+  "양천구시설관리공단": {"sido": "서울", "sigungu": "양천구", "slug": "seoul-yangcheon"},
+  "관악구시설관리공단": {"sido": "서울", "sigungu": "관악구", "slug": "seoul-gwanak"},
+  "강남구도시관리공단": {"sido": "서울", "sigungu": "강남구", "slug": "seoul-gangnam"},
+  "부천도시공사": {"sido": "경기", "sigungu": "부천시", "slug": "gyeonggi-bucheon"},
+  "군포도시공사": {"sido": "경기", "sigungu": "군포시", "slug": "gyeonggi-gunpo"},
+  "오산도시공사": {"sido": "경기", "sigungu": "오산시", "slug": "gyeonggi-osan"},
+  "의왕도시공사": {"sido": "경기", "sigungu": "의왕시", "slug": "gyeonggi-uiwang"},
+  "과천도시공사": {"sido": "경기", "sigungu": "과천시", "slug": "gyeonggi-gwacheon"},
+  "구미도시공사": {"sido": "경북", "sigungu": "구미시", "slug": "gyeongbuk-gumi"}
+}
